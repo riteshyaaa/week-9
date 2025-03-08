@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        button{
+            width: 100px;
+            height: 50px;
+            font-size: 20px;
+            margin: 10px;
+        }
+    </style>
+    <script>
+        function onButtonPress(){
+            const currentValue = document.getElementById("btn").innerHTML;
+            // console.log(currentValue);
+            const newValue =  currentValue.split(" ") [1] ;
+            console.log(newValue);
+            const newPage =  parseInt(newValue.trim()) + 1;
+            // console.log(newPage);
+
+            document.getElementById("btn").innerHTML = "counter " + newPage ;
+        }
+
+       
+    </script>
+    <body>
+       
+        <button onclick="onButtonPress()" id = "btn">counter 0</button>
+    </body>
+</html>
