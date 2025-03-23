@@ -107,54 +107,115 @@ import "./App.css";
 
 // export default App;
 
-const App = () => {
-  const [currentTab, setCurrentTab] = useState(1);
-  const [tabData, setTabData] = useState(1);
-  useEffect(() => {
-    //send a request to the backend server
-    fetch("https://jsonplaceholder.typicode.com/todos/" + currentTab).then(
-      async (response) => {
-        const json = await response.json();
-        setTabData(json);
-      }
-    );
-  }, [currentTab]);
+//  -------------------------------------------------
+
+// const App = () => {
+//   const [currentTab, setCurrentTab] = useState(1);
+//   const [tabData, setTabData] = useState({});
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     //send a request to the backend server
+//      setLoading(true);
+//      fetch("https://jsonplaceholder.typicode.com/todos/" + currentTab).then(
+//       async (response) => {
+//         const json = await response.json();
+//         setTabData(json);
+//         setLoading(false);
+//       }
+//     );
+//     // Cleanup function
+//     return () => {
+//       console.log("Cleanup function");
+//     };
+//   }, [currentTab]);
+//   return (
+//     <div>
+//       <button
+//         onClick={() => {
+//           setCurrentTab(1);
+//         }}
+//         style={{ backgroundColor: currentTab === 1 ? "blue" : "white" }}
+//       >
+//         Todo #1{" "}
+//       </button>
+//       <button
+//         onClick={() => {
+//           setCurrentTab(2);
+//         }}
+//         style={{ backgroundColor: currentTab === 2 ? "blue" : "white" }}
+//       >
+//         Todo #2
+//       </button>
+//       <button
+//         onClick={() => {
+//           setCurrentTab(3);
+//         }}
+//         style={{ backgroundColor: currentTab === 3 ? "blue" : "white" }}
+//       >
+//         Todo #3
+//       </button>
+//       <button
+//         onClick={() => {
+//           setCurrentTab(4);
+//         }}
+//         style={{ backgroundColor: currentTab === 4 ? "blue" : "white" }}
+//       >
+//         Todo #4
+//       </button>
+//       <br/>
+//       { loading ? "loading": ( <div> {tabData.title} </div>)}
+//     </div>
+//   );
+// };
+// export default App;
+
+//--------------------------------
+//React children and key
+
+export default function App() {
   return (
-    <div>
-      <button
-        onClick={() => {
-          setCurrentTab(1);
-        }}
-        style={{ backgroundColor: currentTab === 1 ? "blue" : "white" }}
-      >
-        Todo #1{" "}
-      </button>
-      <button
-        onClick={() => {
-          setCurrentTab(2);
-        }}
-        style={{ backgroundColor: currentTab === 2 ? "blue" : "white" }}
-      >
-        Todo #2
-      </button>
-      <button
-        onClick={() => {
-          setCurrentTab(3);
-        }}
-        style={{ backgroundColor: currentTab === 3 ? "blue" : "white" }}
-      >
-        Todo #3
-      </button>
-      <button
-        onClick={() => {
-          setCurrentTab(4);
-        }}
-        style={{ backgroundColor: currentTab === 4 ? "blue" : "white" }}
-      >
-        Todo #4
-      </button>
-      {tabData && <div> {tabData.title} </div>}
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <Card>
+        <div
+          key={1}
+          style={{
+            color: "green",
+            fontSize: "20px",
+            fontWeight: "bold",
+            background: "red",
+          }}
+        >
+          What do you want to post
+          <br />
+          <br />
+        </div>
+      </Card>
+      <Card
+        key={2}
+        children={
+          <div>
+            <input type="text" placeholder="Enter your post" />
+            <button style={{ color: "red" }}>Post</button>
+          </div>
+        }
+      />
     </div>
   );
-};
-export default App;
+}
+
+function Card({ children }) {
+  return (
+    <div
+      style={{
+        border: "4px solid black",
+        padding: "10px",
+        margin: " 10px",
+        width: "200px",
+        borderRadius: "5px",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
